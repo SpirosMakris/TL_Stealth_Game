@@ -14,6 +14,13 @@ class AFPSGameMode : public AGameModeBase
 public:
 
 	AFPSGameMode();
+
+	// Public hecause we want to call this from the ExtractionZone
+	void CompleteMission(APawn* InstigatorPawn);
+
+	// Also expose an event to BP so we can do custom logic there
+	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
+	void OnMissionCompleted(APawn* InstigatorPawn);
 };
 
 

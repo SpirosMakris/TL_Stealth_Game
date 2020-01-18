@@ -4,8 +4,6 @@
 #include "FPSExtractionZone.h"
 #include "Components/BoxComponent.h"
 #include "Components/DecalComponent.h"
-#include "FPSCharacter.h"
-#include "FPSGameMode.h"
 
 // Sets default values
 AFPSExtractionZone::AFPSExtractionZone()
@@ -29,23 +27,22 @@ AFPSExtractionZone::AFPSExtractionZone()
 	DecalComp->SetupAttachment(RootComponent);
 }
 
+// Called when the game starts or when spawned
+//void AFPSExtractionZone::BeginPlay()
+//{
+//	Super::BeginPlay();
+//	
+//}
 
 void AFPSExtractionZone::HandleOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Log, TEXT("OVERLAPPED WITH EXTRACTION ZONE"));
-
-	// Check our character class for the bIsCarryingObjective bool so we know what to do
-	AFPSCharacter* MyPawn = Cast<AFPSCharacter>(OtherActor);
-	if (MyPawn && MyPawn->bIsCarryingObjective) 
-	{
-		// Disable input && end mission through GameMode
-		AFPSGameMode* GM = Cast<AFPSGameMode>(GetWorld()->GetAuthGameMode());
-		if (GM)
-		{
-			GM->CompleteMission(MyPawn);
-		}
-
-	}
 }
 
+// Called every frame
+//void AFPSExtractionZone::Tick(float DeltaTime)
+//{
+//	Super::Tick(DeltaTime);
+//
+//}
 
