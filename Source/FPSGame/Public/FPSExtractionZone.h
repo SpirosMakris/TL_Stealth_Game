@@ -8,6 +8,7 @@
 
 class UBoxComponent;
 class UDecalComponent;
+class USoundBase;
 
 UCLASS()
 class FPSGAME_API AFPSExtractionZone : public AActor
@@ -28,5 +29,7 @@ protected:
 	
 	UFUNCTION()
 	void HandleOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-		
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Sounds")
+	USoundBase* ObjectiveMissingSound;
 };
