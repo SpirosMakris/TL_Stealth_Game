@@ -1,3 +1,4 @@
+#include "..\Public\FPSAIGuard.h"
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
@@ -14,6 +15,7 @@ AFPSAIGuard::AFPSAIGuard()
 	PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
 
 	PawnSensingComp->OnSeePawn.AddDynamic(this, &AFPSAIGuard::OnPawnSeen);
+	PawnSensingComp->OnHearNoise.AddDynamic(this, &AFPSAIGuard::OnNoiseHeard);
 }
 
 // Called when the game starts or when spawned
@@ -40,3 +42,12 @@ void AFPSAIGuard::Tick(float DeltaTime)
 
 }
 
+void AFPSAIGuard::OnNoiseHeard(APawn* NoiseInstigator, const FVector& Location, float Volume)
+{
+	if (NoiseInstigator == nullptr)
+	{
+		return;
+	}
+
+	DrawDebugSphere(GetWorld(), Location, 16.0f, 8, FColor::Green, false, 10.0);
+}
